@@ -1,7 +1,7 @@
-#zicBang
+# zicBang
 > 스프링부트로 직방 클론 프로젝트
 
-##Sitemap
+## Sitemap
 + 메인
 + 로그인
 + 아파트
