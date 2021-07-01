@@ -1,0 +1,34 @@
+img {width:100%;height:auto;}
+body, h1 {margin:0;}
+a {text-decoration: none;color:#333;}
+ul, li {list-style: none;margin:0;padding:0;}
+input {border:0;}
+
+#header {border-bottom:1px solid rgb(225, 225, 225);}
+#header:after {content:'';display:block;clear:both;}
+#logo {float:left;margin-right:10px;}
+#logo a {display:block;width:112px;height:50px;padding:15px 8px 14px 20px;}
+#menu {float:left;display:flex;}
+#menu li {margin-right:15px;cursor:pointer;}
+#menu li:hover a span {color:rgb(250, 149, 11);}
+#menu li a {display:block;line-height:18px;padding:19px 15px 17px;box-sizing: border-box;}
+#menu li a span {display:block;font-size:17px;color:rgb(34, 34, 34);font-weight:bold; line-height:1.53;}
+#menu li a .small {height:17px;font-size:12px;font-weight:normal; line-height:1.42;}
+#login {float:right;padding:25px 20px 24px 0;}
+#login a {display:block;font-size:12px;height:30px;padding:5px 8px;background:rgb(238, 238, 238);border:1px solid rgb(225, 225, 225);border-radius:4px;box-sizing: border-box;}
+
+/* 메인 */
+#main {position:fixed;display:flex; justify-content:center;width:100%; height:100%;background-image: url("/img/main_img.jpg"); background-size:cover; background-position:center;}
+#main .wrapper {width:574px;padding-top:250px;}
+#main h2 {font-size:40px;font-weight:bold; text-shadow: rgb(255 255 255) 0px 16px 40px;text-align:center;}
+#main .tab {display:flex;height:42px;background-color:rgba(0, 0, 0, 0.65);border-radius: 8px;margin-bottom: 26px;overflow:hidden;}
+#main .tab li {display:flex;align-items:center;justify-content:center;width:100%;height:100%;padding:0 8px;cursor:pointer;}
+#main .tab li.on {background:#fff;cursor:default;}
+#main .tab li.on span {color:#333;font-weight:bold;}
+#main .tab li span {font-size:17px;line-height:1.35;text-align:center;color:#fff;}
+#main .search {position:relative;display:flex;border-radius: 8px; overflow:hidden; background-color:rgb(250, 149, 11);}
+#main .search .input {width:508px;padding:17px 28px;box-sizing: border-box;background-color:rgba(242,242,242,1.00);}
+#main .search .input input {width:100%; display:block;background-color:rgba(242,242,242,1.00);font-size:16px;line-height:1.5;}
+#main .search .input input::placeholder {font-size:15px; color:rgba(166,166,166);}
+#main .search .btn {position:absolute;bottom:0;right:0;width:66px;height:60px;padding:15px 20px; box-sizing: border-box;cursor:pointer;}
+#main .search .btn img {width:28px;}

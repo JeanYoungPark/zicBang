@@ -3,7 +3,9 @@
 
 <body th:fragment="body">
 <th:block th:replace="/layout/fragment/menu :: menu"></th:block>
-<th:block layout:fragment="contents"></th:block>
+<div class="contents">
+    <th:block layout:fragment="contents"></th:block>
+</div>
 <th:block th:replace="/layout/fragment/footer :: footer"></th:block>
 </body>
 </html>

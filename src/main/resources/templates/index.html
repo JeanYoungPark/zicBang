@@ -6,5 +6,28 @@
 </th:block>
 
 <th:block layout:fragment="contents">
-    <div>aaa</div>
+    <div id="main">
+        <div class="wrapper">
+            <h2>어떤 집을 찾고 계세요?</h2>
+            <ul class="tab">
+                <li class="on"><span data="apt" data-txt="원하시는 지역명, 지하철역, 단지명(아파트명)을 입력해주세요">아파트</span></li>
+                <li><span data="villa" data-txt="원하시는 지역명, 지하철역을 입력해주세요">빌라, 투룸+</span></li>
+                <li><span data="oneroom" data-txt="원하시는 지역명, 지하철역을 입력해주세요">원룸</span></li>
+                <li><span data="officetel" data-txt="원하시는 지역명, 지하철역, 오피스텔명을 입력해주세요">오피스텔</span></li>
+                <li><span data="store" data-txt="원하시는 지역명, 지하철역을 입력해주세요">창업/사무실</span></li>
+            </ul>
+            <div class="search">
+                <div class="input">
+                    <input type="text" name="name" placeholder="원하시는 지역명, 지하철역, 단지명(아파트명)을 입력해주세요" autocomplete="off">
+                </div>
+                <div class="btn">
+                    <img src="/img/search_btn.png">
+                </div>
+            </div>
+        </div>
+    </div>
+</th:block>
+
+<th:block layout:fragment="customJs">
+    <script type="text/javascript" th:src="@{/js/main.js}"></script>
 </th:block>
