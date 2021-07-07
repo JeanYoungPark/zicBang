@@ -18,27 +18,6 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class MapService {
-
-    public void saveData(HttpServletRequest req){
-        List<CityData> list = new ArrayList<>();
-
-        ClassPathResource resource = new ClassPathResource("static/source/cityData.json");
-
-        try{
-            byte[] bdata = FileCopyUtils.copyToByteArray(resource.getInputStream());
-            String txt = new String(bdata, StandardCharsets.UTF_8);
-
-            JSONParser jsonParser = new JSONParser();
-            JSONObject jsonObject = (JSONObject) jsonParser.parse(txt);
-            JSONArray jsonArray = (JSONArray) jsonObject.get("DATA");
-            Iterator<JSONObject> iterator = jsonArray.iterator();
-            //db에 넣기
-            while (iterator.hasNext()) {
-                System.out.println(iterator.next());
-            }
-        }catch (Exception e){
-            System.out.println(e);
-        }
-    }
+//    오피스텔
+//    https://apis.zigbang.com/v2/officetels?domain=zigbang&lat_north=37.686510518513636&lat_south=37.57240746728716&lng_east=126.89388362622321&lng_west=126.74933230071929
 }
-;
