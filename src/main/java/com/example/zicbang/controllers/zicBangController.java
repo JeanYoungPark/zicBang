@@ -17,7 +17,6 @@ public class zicBangController {
 
     @GetMapping("/")
     public String index(HttpServletRequest req){
-        mapService.saveData(req);
         return "index";
     }
 
