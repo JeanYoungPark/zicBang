@@ -158,30 +158,6 @@ var infowindow = new kakao.maps.InfoWindow({zIndex:1});
 //     map.setBounds(bounds);
 // }
 
-// 검색결과 항목을 Element로 반환하는 함수입니다
-// function getListItem(index, places) {
-//
-//     var el = document.createElement('li'),
-//         itemStr = '<span class="markerbg marker_' + (index+1) + '"></span>' +
-//             '<div class="info">' +
-//             '   <h5>' + places.place_name + '</h5>';
-//
-//     if (places.road_address_name) {
-//         itemStr += '    <span>' + places.road_address_name + '</span>' +
-//             '   <span class="jibun gray">' +  places.address_name  + '</span>';
-//     } else {
-//         itemStr += '    <span>' +  places.address_name  + '</span>';
-//     }
-//
-//     itemStr += '  <span class="tel">' + places.phone  + '</span>' +
-//         '</div>';
-//
-//     el.innerHTML = itemStr;
-//     el.className = 'item';
-//
-//     return el;
-// }
-
 
 // 지도 위에 표시되고 있는 마커를 모두 제거합니다
 // function removeMarker() {
@@ -191,36 +167,7 @@ var infowindow = new kakao.maps.InfoWindow({zIndex:1});
 //     markers = [];
 // }
 
-// 검색결과 목록 하단에 페이지번호를 표시는 함수입니다
-// function displayPagination(pagination) {
-//     var paginationEl = document.getElementById('pagination'),
-//         fragment = document.createDocumentFragment(),
-//         i;
-//
-//     // 기존에 추가된 페이지번호를 삭제합니다
-//     while (paginationEl.hasChildNodes()) {
-//         paginationEl.removeChild (paginationEl.lastChild);
-//     }
-//
-//     for (i=1; i<=pagination.last; i++) {
-//         var el = document.createElement('a');
-//         el.href = "#";
-//         el.innerHTML = i;
-//
-//         if (i===pagination.current) {
-//             el.className = 'on';
-//         } else {
-//             el.onclick = (function(i) {
-//                 return function() {
-//                     pagination.gotoPage(i);
-//                 }
-//             })(i);
-//         }
-//
-//         fragment.appendChild(el);
-//     }
-//     paginationEl.appendChild(fragment);
-// }
+
 
 // 검색결과 목록 또는 마커를 클릭했을 때 호출되는 함수입니다
 // 인포윈도우에 장소명을 표시합니다
@@ -275,22 +222,52 @@ function img_src(price){
     return imageSrc;
 }
 
-function list(){
+function list(id){
     //아이콘클릭시 정보
 // https://apis.zigbang.com/property/biglab/local/11215
 //아피트아이디들
 // https://apis.zigbang.com/property/biglab/apartments/list?type=local&id=11215&serviceType[0]=apt&serviceType[1]=offer&limit=5&order=viewCount
 //아이콘클릭시 아파트정보
 // https://apis.zigbang.com/property/biglab/apartments/listDetail?type=local&id=11215&apts=%5B70112,80122,58065,79201,9404%5D&order=viewCount
-//     $.ajax({
-//         url: 'https://apis.zigbang.com/property/biglab/local/'+id,
-//         method: 'get',
-//         dataType: 'json'
-//     }).done(function(data){
-//         console.log(data)
-//     });
+    $.ajax({
+        url: 'https://apis.zigbang.com/property/biglab/local/'+id,
+        method: 'get',
+        dataType: 'json'
+    }).done(function(data){
+        $("#list h3").text(data.address);
+        $("#list .top.info h2").text(data.name);
+        $("#list .top.info span").text(data.description);
+
+        $.each(data.price, function(index, item){
+            $(".areas .tabs li").eq(index).attr("data-max",item.maxSalesPrice).attr("data-min",item.minSalesPrice);
+        });
+
+        $(".areas .info .txt").text(price(data.price[0].minSalesPrice, data.price[7].maxSalesPrice));
+    });
 }
 
+function price(min, max){
+    var val;
+
+    if(min % 10000 == min) val = addComma(min);
+    else {
+        val = parseInt((min / 10000)) + "억" + addComma((min % 10000));
+    }
+
+    val += "~";
+
+    if(max % 10000 == max) val += addComma(max);
+    else {
+        val += parseInt((max / 10000)) + "억" + addComma((max % 10000));
+    }
+
+    return val;
+}
+
+function addComma(num){
+    var regexp = /\B(?=(\d{3})+(?!\d))/g;
+    return num.toString().replace(regexp, ',');
+}
 // 마커를 생성하고 지도 위에 마커를 표시하는 함수입니다
 function addMarker(position, id, title, price) {
 
@@ -307,10 +284,10 @@ function addMarker(position, id, title, price) {
 
     //스타일
     var st = "display:flex;justify-content:center;align-items:center;flex-direction:column;width:85px;height:53px;background-image: url("+imageSrc+");text-align:center;",
-    content = '<div class="icon" style="'+st+'" data="'+id+'">' +
-        '<div style="color:#fff;font-size:11px;">'+title+'</div>'+
-        '<div style="color:#fff;font-size:12px;">'+price/10000+'</div>'+
-        '</div>',
+    content = `<div class="icon" style="${st}" data="${id}" onclick="list(${id})">
+        <div style="color:#fff;font-size:11px;">${title}</div>
+        <div style="color:#fff;font-size:12px;">${price/10000}</div>
+        </div>`,
     customOverlay = new kakao.maps.CustomOverlay({
         position: position,
         content: content
