@@ -49,3 +49,14 @@ input, button {border:0;}
 #map #placesList .item .info {padding-bottom:13px; border-bottom:1px solid rgb(241, 241, 241);}
 #map #placesList .item .info h5 {font-size: 12px;}
 #map #placesList .item .info span {font-size:10px;}
+
+#list {position:fixed; right:0;top:80px;width:400px;height:100%;background:#fff;border-left:1px solid rgb(225, 225, 225);}
+#list .title h3 {height:56px;display:flex;align-items: center;font-size:18px;padding:0 18px;font-weight:normal;}
+#list .list_wrapper {background:rgb(238, 238, 238);}
+#list .list_wrapper .info {padding:15px 18px;margin-bottom:10px;border-top:1px solid rgb(238, 238, 238);background:#fff;}
+#list .list_wrapper .info h2{font-size:23px;line-height:30px;}
+#list .list_wrapper .info span {color:rgb(117, 117, 117);font-size:14px;}
+#list .tabs_wrapper {height:45px;overflow:hidden; scroll-behavior:smooth;background:#fff;}
+#list .tabs {display:flex; flex-direction:row; height:45px;}
+#list .tabs li {display:flex;align-items:center;justify-content: center; min-width:75px;text-align:center;cursor:pointer;}
+#list .tabs li.on {font-weight:600;border-bottom: 2px solid #000;box-sizing: border-box;}

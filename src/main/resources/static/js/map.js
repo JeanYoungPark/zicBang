@@ -1,6 +1,11 @@
 $(document).ready(function(){
-
+    $(".tabs li").on("click",function(){
+        $(this).parents(".tabs").find("li").removeClass("on");
+        $(this).addClass("on");
+        $(this).parents(".tabs_wrapper").scrollLeft(75*($(this).index()-1));
+    });
 });
+
 var markers = [];
 var container = document.getElementById('mapWrap');
 var options = {
