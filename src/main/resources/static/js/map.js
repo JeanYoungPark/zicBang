@@ -1,9 +1,15 @@
 $(document).ready(function(){
+
     $(".tabs li").on("click",function(){
         $(this).parents(".tabs").find("li").removeClass("on");
         $(this).addClass("on");
         $(this).parents(".tabs_wrapper").scrollLeft(75*($(this).index()-1));
+
+        var maxP = $(this).attr("data-max");
+        var minP = $(this).attr("data-min");
+        $(".areas .info .txt").text(price(minP, maxP));
     });
+
 });
 
 var markers = [];
@@ -224,25 +230,54 @@ function img_src(price){
 
 function list(id){
     //아이콘클릭시 정보
-// https://apis.zigbang.com/property/biglab/local/11215
 //아피트아이디들
 // https://apis.zigbang.com/property/biglab/apartments/list?type=local&id=11215&serviceType[0]=apt&serviceType[1]=offer&limit=5&order=viewCount
 //아이콘클릭시 아파트정보
 // https://apis.zigbang.com/property/biglab/apartments/listDetail?type=local&id=11215&apts=%5B70112,80122,58065,79201,9404%5D&order=viewCount
+    //동네정보
+
     $.ajax({
         url: 'https://apis.zigbang.com/property/biglab/local/'+id,
         method: 'get',
         dataType: 'json'
-    }).done(function(data){
+    }).done(data => {
         $("#list h3").text(data.address);
         $("#list .top.info h2").text(data.name);
         $("#list .top.info span").text(data.description);
+        $("#list .apts .info .area").text(data.name);
 
         $.each(data.price, function(index, item){
             $(".areas .tabs li").eq(index).attr("data-max",item.maxSalesPrice).attr("data-min",item.minSalesPrice);
         });
 
-        $(".areas .info .txt").text(price(data.price[0].minSalesPrice, data.price[7].maxSalesPrice));
+        $(".areas .tabs li:eq(0)").trigger("click");
+        $(".areas .info .price").text(price(data.price[0].minSalesPrice, data.price[7].maxSalesPrice));
+    }).fail(error=>{
+        console.log(error);
+    });
+
+    var apts;
+
+    $.ajax({
+        url: `https://apis.zigbang.com/property/biglab/apartments/list?type=local&id=${id}&serviceType[0]=apt&serviceType[1]=offer&limit=5&order=viewCount`,
+        method:'get',
+        dataType:'json'
+    }).done(data =>{
+        $("#list .apts .info .more").text(data.count);
+        apts = `[${data.ids.join()}]`;
+
+        $.ajax({
+            url: `https://apis.zigbang.com/property/biglab/apartments/listDetail?type=local&id=${id}&apts=${apts}&order=viewCount`,
+            method:"get",
+            dataType:"json"
+        }).done(data=>{
+            console.log(data);
+        }).fail(error=>{
+            console.log(error);
+        });
+
+    }).fail(error=>{
+        console.log(error);
     });
 }
 
