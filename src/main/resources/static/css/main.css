@@ -1,7 +1,7 @@
 img {width:100%;height:auto;}
 body, h1, h2, h3, h4, h5 {margin:0;}
 a {text-decoration: none;color:#333;}
-ul, li {list-style: none;margin:0;padding:0;}
+ul, li, p {list-style: none;margin:0;padding:0;}
 input, button {border:0;}
 
 #header {border-bottom:1px solid rgb(225, 225, 225);}
@@ -50,13 +50,27 @@ input, button {border:0;}
 #map #placesList .item .info h5 {font-size: 12px;}
 #map #placesList .item .info span {font-size:10px;}
 
-#list {position:fixed; right:0;top:80px;width:400px;height:100%;background:#fff;border-left:1px solid rgb(225, 225, 225);}
+#list {display:none;position:fixed; right:0;top:80px;width:400px;height:100%;background:#fff;border-left:1px solid rgb(225, 225, 225);}
 #list .title h3 {height:56px;display:flex;align-items: center;font-size:18px;padding:0 18px;font-weight:normal;}
 #list .list_wrapper {background:rgb(238, 238, 238);}
 #list .list_wrapper .info {padding:15px 18px;margin-bottom:10px;border-top:1px solid rgb(238, 238, 238);background:#fff;}
+#list .list_wrapper .info:after {content:'';display:block;clear:both;}
 #list .list_wrapper .info h2{font-size:23px;line-height:30px;}
 #list .list_wrapper .info span {color:rgb(117, 117, 117);font-size:14px;}
+#list .list_wrapper .apts .info {margin-bottom:0;border-bottom:1px solid rgb(238, 238, 238);}
+#list .list_wrapper .apts .info .area {font-size:18px; color:rgb(34, 34, 34);}
+#list .list_wrapper .apts .info .more {float:right;font-size:16px; color:rgb(34, 34, 34);}
+#list .list_wrapper .apts .info em {font-style: normal}
+#list .list_wrapper .apts .info .more em {color:rgb(250, 136, 11)}
 #list .tabs_wrapper {height:45px;overflow:hidden; scroll-behavior:smooth;background:#fff;}
 #list .tabs {display:flex; flex-direction:row; height:45px;}
 #list .tabs li {display:flex;align-items:center;justify-content: center; min-width:75px;text-align:center;cursor:pointer;}
 #list .tabs li.on {font-weight:600;border-bottom: 2px solid #000;box-sizing: border-box;}
+
+#list .list_wrapper .apts .products li {display:flex;padding:13px 18px;background:#fff;border-bottom:1px solid rgb(238, 238, 238);}
+#list .list_wrapper .apts .products .img {width:104px;height:80px;margin-right:13px;overflow:hidden;background:rgb(246, 246, 246);}
+#list .list_wrapper .apts .products .img img {width:100%;height:auto;}
+#list .list_wrapper .apts .products .pd_info {display:flex; flex-direction: column}
+#list .list_wrapper .apts .products .pd_info .tit {font-size:16px;font-weight: bold;}
+#list .list_wrapper .apts .products .pd_info .homes {font-size:15px;margin-top:4px;color:rgb(34, 34, 34); }
+#list .list_wrapper .apts .products .pd_info .num {font-size:15px;margin-top:4px;color:rgb(45, 96, 163);}
